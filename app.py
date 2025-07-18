@@ -3,6 +3,9 @@ import streamlit as st
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
+import langchain
+st.caption(f"🧠 LangChain version: {langchain.__version__}")
+
 
 st.set_page_config(page_title="Invoice-GR Matcher", layout="wide")
 st.title("🏗️ Invoice-GR Matching POC (LangChain + GPT)")
