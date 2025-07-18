@@ -120,15 +120,16 @@ gr_lines = {json.dumps(gr_lines, indent=4)}
                 SystemMessage(content="You are a helpful assistant that only returns valid JSON."),
                 HumanMessage(content=meta_prompt)
             ]
-            llm_response = llm.invoke(messages)
+            with st.spinner('🔄 Matching Invoice to GR... Please wait! ⏳'):
+                llm_response = llm.invoke(messages)
 
-            # Try to parse LLM JSON response
-            try:
-                data = json.loads(llm_response.content)
-                st.json(data)
-            except json.JSONDecodeError:
-                st.warning("⚠ Could not parse LLM output as JSON. Check formatting.")
-                st.code(llm_response.content)
+                # Try to parse LLM JSON response
+                try:
+                    data = json.loads(llm_response.content)
+                    st.json(data)
+                except json.JSONDecodeError:
+                    st.warning("⚠ Could not parse LLM output as JSON. Check formatting.")
+                    st.code(llm_response.content)
 
         except Exception as e:
             st.error(f"❌ Error: {str(e)}")
